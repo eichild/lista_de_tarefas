@@ -73,31 +73,26 @@ class _HomePageState extends State<HomePage> {
             final item = widget.items[index];
 
             return Dismissible(
-                child: CheckboxListTile(
-                  title: Text(item.title),
-                  value: item.done,
-                  onChanged: (value) {
-                    setState(() {
-                      item.done = value;
-                    });
-                  },
-                ),
-
-                key: Key(item.title),
-                background: Container(
-                  color: Colors.red.withOpacity(0.9),
-                ),
-                onDismissed: (directional) {
-                  if (directional == DismissDirection.endToStart) {
-                    delete(index);
-                  }
-                   else(directional ==  DismissDirection.startToEnd){
-                    background : Container(
-                      color: Colors.blue.withOpacity(0.9),
-                      );
-                  };
-                });
+              child: CheckboxListTile(
+                title: Text(item.title),
+                value: item.done,
+                onChanged: (value) {
+                  setState(() {
+                    item.done = value;
+                  });
+                },
+              ),
+              onDismissed: (directional) {
+                delete(index);
+              },
+              key: Key(item.title),
+              background: Container(
+                color: Colors.red.withOpacity(0.9),
+                child: Icon(Icons.delete, size: 27, color: Colors.white),
+              ),
+            );
           }),
+
       floatingActionButton: FloatingActionButton(
         onPressed: add,
         child: Icon(Icons.add),
